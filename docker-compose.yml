@@ -25,3 +25,14 @@ services:
       interval: 3s
       timeout: 1s
       retries: 3
+    depends_on:
+      - phoenix
+  phoenix:
+    image: arizephoenix/phoenix:latest
+    ports:
+      - "6006:6006"  # Expose port 6006 for the Phoenix UI and HTTP collector
+      - "4317:4317"  # Expose port 4317 for OTLP gRPC collector
+  redis:
+    image: redis/redis-stack:latest
+    ports:
+      - "6379:6379"
